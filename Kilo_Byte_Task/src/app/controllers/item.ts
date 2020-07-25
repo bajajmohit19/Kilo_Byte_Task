@@ -71,7 +71,7 @@ let item = {
             Item.find({ _id: { $in: arr } }, { addresses: 1 })
                 .lean()
                 .exec((error: ErrorObj, doc: any) => {
-                    
+
                     if (error || !doc) {
                         return resolve([]);
                     }

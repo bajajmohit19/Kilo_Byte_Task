@@ -6,13 +6,13 @@ import { errorObj } from "../../config/settings";
 
 export default (app: any) => {
 
-    app.post("/login", async (req: Request, res: Response) => {
+    app.post("/signin", async (req: Request, res: Response) => {
         let { body } = req;
         let response = await userCtrl.loginWithPassword(body);
         res.json(response);
     });
     app
-        .route("/register")
+        .route("/signup")
         .post(async (req: Request, res: Response) => {
             let { body } = req;
             let response = await userCtrl.add(body);

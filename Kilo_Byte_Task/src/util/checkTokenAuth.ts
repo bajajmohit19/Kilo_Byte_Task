@@ -8,7 +8,8 @@ const excludeAPis = ['/login', '/register']
 
 export default (req: any, res: any, next: any) => {
 
-    console.log('hererere')
+
+    console.log('insidee....')
     let errorResp = {
         ...errorObj,
         message: 'Token is not valid'
@@ -33,6 +34,7 @@ export default (req: any, res: any, next: any) => {
             const userCtrl = require('../app/controllers/user');
             userCtrl.default.isUserExist(user._id)
                 .then((doc: any) => {
+                    console.log(doc)
                     if (doc) {
                         console.log(user, doc)
                         _.forEach(doc, (val, key) => {

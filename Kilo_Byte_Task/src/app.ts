@@ -9,8 +9,6 @@ import helmet from 'helmet'
 import mongoose from "mongoose";
 import _ from 'lodash'
 import checkTokenAuth from './util/checkTokenAuth'
-// Controllers (route handlers)
-// import {config} from './config/settings'
 import authRoutes from "./app/api/routes";
 
 

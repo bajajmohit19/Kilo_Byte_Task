@@ -38,48 +38,50 @@ let user = {
                 })
         });
     },
-    loginWithPassword: (data: any) => (new Promise((resolve) => {
-        const { mobile, password } = data;
-        const error = "wrong email or password";
-        let query = User.findOne({ mobile })
-        query.exec(function (err, user: any) {
+    loginWithPassword: (data: any) => {
+        new Promise((resolve) => {
+            const { mobile, password } = data;
+            const error = "Wrong email or password";
+            let query = User.findOne({ mobile })
+            query.exec(function (err, user: any) {
 
-            if (!user) return resolve({ ...errorObj, message: error });
+                if (!user) return resolve({ ...errorObj, message: error });
 
 
-            user.comparePassword(password).then(({ err, isMatch }: any) => {
+                user.comparePassword(password).then(({ err, isMatch }: any) => {
 
-                if (!isMatch) {
-                    // return false;
-                    return resolve({ ...errorObj, message: "Invalid password" });
-                }
+                    if (!isMatch) {
+                        // return false;
+                        return resolve({ ...errorObj, message: "Invalid password" });
+                    }
 
-                const JWTToken = jwt.sign({
-                    _id: user._id,
-                    userType: user.userType,
-                    name: user.name,
-                    mobile: user.mobile
-
-                },
-                    APP_SECRET,
-                    {
-                        expiresIn: "365d",
-                    });
-
-                return resolve({
-                    ...successObj,
-                    token: JWTToken,
-                    user: {
+                    const JWTToken = jwt.sign({
                         _id: user._id,
                         userType: user.userType,
                         name: user.name,
                         mobile: user.mobile
+
                     },
+                        APP_SECRET,
+                        {
+                            expiresIn: "365d",
+                        });
+
+                    return resolve({
+                        ...successObj,
+                        token: JWTToken,
+                        user: {
+                            _id: user._id,
+                            userType: user.userType,
+                            name: user.name,
+                            mobile: user.mobile
+                        },
+                    });
+
                 });
 
             });
-
-        });
-    }))
+        })
+    }
 }
 export default user;
