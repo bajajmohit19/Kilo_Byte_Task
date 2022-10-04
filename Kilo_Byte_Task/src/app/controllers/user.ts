@@ -30,7 +30,7 @@ let user = {
     },
     isUserExist: (_id: string) => {
         return new Promise(async (resolve) => {
-            User.findById(_id, { userType: 1, mobile: 1 }).lean().then(doc => {
+            User.findById(_id, { password: 0 }).lean().then(doc => {
                 return resolve(doc)
             })
                 .catch(err => {
